@@ -1,0 +1,21 @@
+try
+	tell application "System Events"
+		set screenWidth to (do shell script "system_profiler SPDisplaysDataType | grep -A100 -e 'Thunderbolt Display' | awk '/Resolution/{print $2}'")
+		set screenHeight to (do shell script "system_profiler SPDisplaysDataType | grep -A100 -e 'Thunderbolt Display' | awk '/Resolution/{print $4}'")
+		-- display dialog screenWidth & " X " & screenHeight
+		set frontApp to get name of application processes whose frontmost is true
+		
+	end tell
+	-- display dialog frontApp
+	set AppPath to "" & frontApp & ".app"
+	tell application AppPath
+		set bounds of window 1 to {screenWidth / 2, 0, screenWidth, screenHeight / 1}
+		get bounds of front window
+	end tell
+	
+on error errMsg number errNum
+	tell me
+		activate
+		display alert errMsg & return & return & "Error number" & errNum buttons "Cancel"
+	end tell
+end try
