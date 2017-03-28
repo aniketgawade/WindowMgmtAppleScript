@@ -2,7 +2,7 @@
 
 Apple script to move window either to left or right using hotkeys.
 
-###Steps:
+### Steps:
 - Open Automator
 - Select Service and then so to utility and select apple script
 - Add one of the above script and run and check its working
